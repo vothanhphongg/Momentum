@@ -1,0 +1,7 @@
+import{a as B}from"./chunk-N5DH5ULG.js";import{g as h,l as S}from"./chunk-IRMYAC6R.js";import{Ab as P,Rb as g,ec as A}from"./chunk-HPWCPLRR.js";import{Ea as u,Na as j,Sb as I,ic as k,id as N,rc as q,rd as x,ya as p,za as X}from"./chunk-TM67VPZU.js";import{b as F}from"./chunk-JWYCKY2V.js";import{f as L,o as C,q as w}from"./chunk-6KXF36WM.js";C();w();var d=L(F()),m=L(A());x();q();X();j();var D=(t,r,e,i)=>{let n=r[i]||[],o=(t||[]).filter(s=>n.some(c=>s.coinId===c.coinId));return(e||[]).reduce((s,a)=>{let c=o.find(l=>l.coinId===a.coinId);return c&&s.push(c),s},[])},M=(t,r)=>(r&&(t=(t||[]).filter(e=>!Object.values(N).includes(e.protocolId))),t),E=t=>{let r=h(),e=S(r),i=(0,m.useSelector)(P),n=(0,m.useSelector)(g),{data:o,loading:f,run:s}=B(async()=>{let[l,R,W]=await Promise.all([u(p.getSupportedCustomChains),u(p.getXRC20ProtocolList,{chainId:0}),u(p.getXRC20ProtocolList,{chainId:k})]),b=l.data||[],v=R.data||[],y=W.data||[];return{supportNetworkList:b,protocolList:v,fractalBtcProtocolList:y}},{manual:!0,cacheKey:"customNetwork"}),a=(0,d.useMemo)(()=>M(t===I?o?.fractalBtcProtocolList:o?.protocolList,e),[o?.fractalBtcProtocolList,o?.protocolList,e,t]),c=(0,d.useMemo)(()=>D(o?.supportNetworkList,i,n,r),[o?.supportNetworkList,i,n,r]);return{data:{protocolList:a,supportNetworkList:c},run:s,loading:f}},U=E;export{U as a};
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=chunk-HHQEFPQ4.js.map

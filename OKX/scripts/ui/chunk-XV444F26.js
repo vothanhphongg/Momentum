@@ -1,0 +1,7 @@
+import{c as R}from"./chunk-N2BCRNDB.js";import{$a as N,Ab as F,Bb as y,Cb as U,Db as w,Eb as W,Fb as B,Gb as K,Hb as k,Ib as H,Pa as n,Qa as T,Ra as c,Sa as a,Ta as I,Ua as s,Va as A,Wa as _,Xa as O,Ya as S,Za as p,_a as d,ab as D,bb as m,cb as P,eb as C,fb as l,gb as u,hb as V,ib as x,jb as M,kb as o,mb as f,nb as g,ob as h,pb as L,qb as r,rc as X,sb as v,vb as E,wb as G}from"./chunk-TM67VPZU.js";import{o as t,q as e}from"./chunk-6KXF36WM.js";t();e();t();e();M();t();e();async function j(b){return(await R.connect_records).query(b)}var i={"okx6963-provider":"okx6963-provider","ethereum-provider":"ethereum-provider"};X();M();var Rt="/static/images/default-img.svg",Tt="/static/images/default-img/default-chain.svg",ct="/static/images/default-img/default-coin.svg",at="/static/images/default-img/default-dapp.svg",It="/static/images/tx-history/default-nft.svg",At="Unknown",_t="/static/images/default-img.svg",Ot={[n]:o,[T]:r,[c]:r,[a]:E,[I]:v,[s]:G,[A]:r,[_]:F,[O]:E,[S]:f,[p]:y,[d]:w,[D]:g,[m]:h,[P]:L,[N]:W,[C]:B,[l]:K,[u]:k,[V]:U,[x]:H,[i["ethereum-provider"]]:o,[i["okx6963-provider"]]:o},St={SEND:"send",RECEIVE:"receive"},pt={NORMAL:0,GARBAGE_AIRDROP:1,PIXIU_DISK:2,GAS_MINT:3},dt={NORMAL:1},Nt="115792089237316195423570985008687907853269984665640564039457584007913129639935",Dt=1e15;export{j as a,i as b,Rt as c,Tt as d,ct as e,at as f,It as g,At as h,_t as i,Ot as j,St as k,pt as l,dt as m,Nt as n,Dt as o};
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=chunk-XV444F26.js.map

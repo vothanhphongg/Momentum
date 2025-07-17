@@ -1,0 +1,7 @@
+import{a as g}from"./chunk-YX6AGPQL.js";import{a as y}from"./chunk-WZXX22CA.js";import{c as r}from"./chunk-W2CTJYFJ.js";import"./chunk-XUKVTAH5.js";import"./chunk-7UPVX2FL.js";import{a as s,b as d}from"./chunk-BSFXZ46S.js";import"./chunk-ZMCTBWUY.js";import"./chunk-G2266BV2.js";import"./chunk-7VFUX7IX.js";import{o as i,q as c}from"./chunk-6KXF36WM.js";i();c();var m=class extends y{async getWeb3(){return await r()}async getAccount(){let t=await r(),{ordinalsAddress:n}=t;return n}async getPaymentAccount(){let t=await r(),{paymentAddress:n}=t;return n}async getChainId(){return s.BTC}async signMessage({message:t,account:n}){function o(e){let u=String.fromCodePoint(...e);return btoa(u)}let a=await r();try{let{signature:e}=await a.bitcoin.signMessage(n,new TextEncoder().encode(t));return o(e)}catch(e){throw console.log("signMessage err:",e),e}}async switchNetwork(){return!0}async getAllChainTypeInfoList(){return[{address:await this.getAccount(),chainType:d.BTC,chainId:s.BTC}]}async getPublicKey(){let t=await r(),{ordinalsPublicKey:n}=t;return n}async getPaymentPublicKey(){let t=await r(),{paymentPublicKey:n}=t;return n}async signPsbt({psbtHex:t,inputsToSign:n}){let{hex:o}=await import("./esm-LQGG7UNK.js"),e=await(await r())?.bitcoin?.signPSBT(o.decode(t),{inputsToSign:n});return o.encode(e)}async getBtcAddressType({address:t}){return g.getBtcAddressType({address:t})}};export{m as PhantomBtcAdapter};
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=PhantomBtcAdapter-6FC36XML.js.map

@@ -1,13 +1,14 @@
 import fs from 'fs'
 import { Mutex } from 'async-mutex'
 import Client from './src/core/client.js'
-import { CAMPAIGNS, TASKS } from './src/utils/constants.js'
-import { initBrowser } from './src/core/basicOperations/browser.js'
+import { CAMPAIGNS } from './src/utils/constants.js'
+import { nextCycle } from './src/utils/common.js'
 
 const mutex = new Mutex()
 
 async function processAccount(account) {
     const client = new Client(account)
+
     try {
         const tasks = [
             // Login and create Galxe account if not exists
@@ -41,6 +42,8 @@ async function processAccount(account) {
             },
             // Task 3: Twitter Operations
             async () => {
+                client.basicUserInfo = await client.getBasicUserInfo()
+                client.campaignDetail = await client.getCampaignDetail()
                 if (client.basicUserInfo?.hasTwitter) {
                     await client.twitterOperations()
                 }
@@ -51,14 +54,12 @@ async function processAccount(account) {
             },
             // Claim Point
             async () => {
+                client.basicUserInfo = await client.getBasicUserInfo()
+                client.campaignDetail = await client.getCampaignDetail()
                 const release = await mutex.acquire()
                 await client.claimPoint()
                 release()
             },
-            // Provide liquidity //FIXME: This task has a bug
-            // async () => {
-            //     await client.provideLiquidity()
-            // },
         ]
 
         for (const task of tasks) {
@@ -68,17 +69,15 @@ async function processAccount(account) {
                 client.err(`Error during task: ${error}`)
                 await client.report({
                     account: account.seedPhrase,
-                    status: error.toString(),
+                    status: error?.message?.toString(),
                 })
+                return
             }
         }
 
         // Update campaign details after processing tasks to calculate total points
         client.campaignDetail = await client.getCampaignDetail()
-        const totalPoints = Object.values(CAMPAIGNS).reduce(
-            (sum, campaign) => sum + client.getClaimedPoints(campaign),
-            0
-        )
+        const totalPoints = Object.values(CAMPAIGNS).reduce((sum, campaign) => sum + client.getClaimedPoints(campaign), 0)
         await client.report({
             account: account.seedPhrase,
             point: totalPoints,
@@ -87,7 +86,7 @@ async function processAccount(account) {
         client.err(`Error processing account: ${error}`)
     }
 
-    // nextCycle().then(() => processAccount(account))
+    nextCycle().then(() => processAccount(account))
 }
 
 async function main() {

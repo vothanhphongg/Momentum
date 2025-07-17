@@ -1,0 +1,7 @@
+import{d as l,e as f}from"./chunk-X3FPMAMT.js";import{b as d}from"./chunk-MRB2XFLQ.js";import{ec as P}from"./chunk-HPWCPLRR.js";import{d as n,f as T}from"./chunk-DEOJU4Z3.js";import{f as a}from"./chunk-N2BCRNDB.js";import{Ia as u,Na as E,ya as m,za as v}from"./chunk-TM67VPZU.js";import{G as i}from"./chunk-PUSMMCUD.js";import{E as p,R as A}from"./chunk-UWJLNJLY.js";import{b as y}from"./chunk-JWYCKY2V.js";import{f as c,o,q as s}from"./chunk-6KXF36WM.js";o();s();var w=c(y()),I=c(P());A();o();s();v();E();T();var D=async()=>{let t=await n().getSelectedWallet(),r=await n().getRequestHeaders({walletId:t,needSign:!0,currency:"usd"});return{walletId:t,config:{headers:r}}};async function h(){let{walletId:t,config:r}=await D();try{let{data:e}=await u(m.postApprovedProjectList,{accountIds:[t]},r);return e||{}}catch(e){throw new Error(e)}}var _=()=>{let t=(0,I.useDispatch)();return(0,w.useCallback)(async()=>{try{let e=(await h())?.approvalProjectList||[];return t(f(!0)),t(l(e)),e}catch(r){let e=r;throw i.error({title:e?.msg||e?.error_message||p("wallet_extension_approval_toast_list_retrieve_fail"),duration:2,placement:i.DIRECTION.top,showClose:!0}),r}},[])};o();s();var G=()=>{let t=_();d("wallet-transaction",{onSuccess:async r=>{[a.AUTHORIZATION,a.CANCEL_AUTHORIZATION,a.UPGRADE_7702,a.REVOKE_7702].includes(r?.data?.txType)&&await t()},onError:t,pollingInterval:10*1e3})};export{_ as a,G as b};
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=chunk-DSWVONUM.js.map

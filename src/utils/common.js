@@ -11,6 +11,7 @@ export const nextCycle = async () => {
     const maxHours = 12
     const hourToNextDay = 24 - new Date().getHours()
     const delay = (hourToNextDay + Math.floor(Math.random() * (maxHours - minHours + 1) + minHours)) * 60 * 60 * 1000 // Convert hours to milliseconds
+    console.log(`Next cycle will start at ${new Date(Date.now() + delay).toLocaleString()}`)
     return await sleep(delay)
 }
 

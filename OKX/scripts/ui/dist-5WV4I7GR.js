@@ -1,0 +1,7 @@
+import{a}from"./chunk-W27T7L2H.js";import"./chunk-HWGRDY67.js";import"./chunk-M35OA6FM.js";import"./chunk-PDUOSATP.js";import"./chunk-NM2PDVBD.js";import"./chunk-MNUZ7VRA.js";import"./chunk-YPUQ22UC.js";import"./chunk-FF4LY6PE.js";import"./chunk-76KCDJDG.js";import"./chunk-YDUDQP2P.js";import"./chunk-PGPFV4JQ.js";import"./chunk-MIBHDVGP.js";import"./chunk-7VFUX7IX.js";import"./chunk-XLF4LAH2.js";import"./chunk-ONKZ57T6.js";import"./chunk-ZC7Q7LCH.js";import"./chunk-6KXF36WM.js";export default a();
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=dist-5WV4I7GR.js.map

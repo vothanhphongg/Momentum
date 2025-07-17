@@ -1,0 +1,7 @@
+import{a as d}from"./chunk-ASEWS4VF.js";import"./chunk-ACTCEXOV.js";import"./chunk-3CTIGV4T.js";import"./chunk-52XLG23J.js";import"./chunk-Q76QXAWY.js";import"./chunk-HPWCPLRR.js";import"./chunk-TSTPZ3JM.js";import"./chunk-3DZ7WRLL.js";import"./chunk-DEOJU4Z3.js";import"./chunk-N2BCRNDB.js";import"./chunk-TM67VPZU.js";import"./chunk-VW6OQNWT.js";import"./chunk-UWJLNJLY.js";import"./chunk-VRY2ADKE.js";import"./chunk-5U7FO2PW.js";import"./chunk-XDY6V34Y.js";import"./chunk-YJFNO57I.js";import"./chunk-DZ6CTC22.js";import"./chunk-47UWF72W.js";import{b as n}from"./chunk-JWYCKY2V.js";import"./chunk-G2266BV2.js";import"./chunk-L4PAIYPH.js";import"./chunk-UT7LJPKF.js";import"./chunk-AFZ6A2B3.js";import"./chunk-VVPY7ZA7.js";import"./chunk-KUW5VATV.js";import"./chunk-BNAVWOJ2.js";import"./chunk-IG2Q5ALZ.js";import"./chunk-WOMUNWBT.js";import"./chunk-QYVQBXDG.js";import"./chunk-7D4PUIEN.js";import"./chunk-7QO4TZYQ.js";import"./chunk-FF4LY6PE.js";import"./chunk-76KCDJDG.js";import"./chunk-YDUDQP2P.js";import"./chunk-PGPFV4JQ.js";import"./chunk-MIBHDVGP.js";import"./chunk-7VFUX7IX.js";import"./chunk-XLF4LAH2.js";import"./chunk-ONKZ57T6.js";import"./chunk-ZC7Q7LCH.js";import{f as t,o,q as e}from"./chunk-6KXF36WM.js";o();e();var s=t(n());function l(){let{downloadAddress:r}=d();return(0,s.useEffect)(()=>{r(),setTimeout(()=>{window.close()},300)},[]),null}var i=l;export{i as default};
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=DownloadAddresses-CA665C7U.js.map

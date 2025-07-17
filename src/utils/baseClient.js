@@ -1,9 +1,12 @@
+import fs from 'fs'
 import { browser_ } from '@vannb/js-utils'
 import { stringValueToProxy } from './proxy.js'
 import { FetchRequest, ethers } from 'ethers'
 import { HttpsProxyAgent } from 'https-proxy-agent'
 import axios from 'axios'
 import dotenv from 'dotenv'
+import { sleep } from './common.js'
+import path from 'path'
 dotenv.config()
 
 class BaseClient {
@@ -15,7 +18,7 @@ class BaseClient {
         this.headers = {}
 
         const { agent, provider, wallet } = createWalletAndProvider({
-            url: 'https://api.mainnet-beta.solana.com',
+            url: 'https://sui-mainnet-endpoint.blockvision.org/',
             privateKey,
             seedPhrase,
             proxy,
@@ -77,7 +80,7 @@ class BaseClient {
             } catch (error) {
                 this.debug(`Attempt ${attempt} to GET failed: ${error}`)
                 if (attempt !== retry) {
-                    await this.sleep(pollInterval)
+                    await sleep(pollInterval)
                 }
             }
         }
@@ -124,7 +127,7 @@ class BaseClient {
                     // Poll until we get a final response or reach the poll limit
                     let pollCount = 0
                     while (pollCount < pollLimit) {
-                        await this.sleep(pollInterval)
+                        await sleep(pollInterval)
                         pollCount++
 
                         this.debug(`Polling attempt ${pollCount} for ${pollUrl}`)
@@ -170,26 +173,27 @@ class BaseClient {
 
     async report(opts = {}) {
         try {
-            await fetch('http://localhost:5074/api/report/add-report', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `ignore`,
+            const accjson = JSON.parse(fs.readFileSync(path.resolve('account.json'), 'utf8'))
+            const url = 'http://103.166.182.164:65123/api/v1/user-report/sync-by-template'
+            const data = {
+                apiKey: accjson?.apiKey || 'unknown-api-key',
+                deviceId: accjson?.deviceId || 'unknown-device-id',
+                userNodeId: accjson?.userNodeId || 'unknown-user-node-id',
+                data: {
+                    project: 'Momentum2',
+                    status: 'success',
+                    ...opts,
                 },
-                body: JSON.stringify({
-                    apiKey: this.account.userConfig?.apiKey || 'unknown-api-key',
-                    deviceId: this.account.userConfig?.deviceId || 'unknown-device-id',
-                    userNodeId: this.account.userConfig?.userNodeId || 'unknown-user-node-id',
-                    data: {
-                        project: 'Momentum',
-                        status: 'success',
-                        tool: 'chainopera',
-                        ...opts,
-                    },
-                }),
-            })
-                .then(res => res.json())
-                .then(data => this.log(`Report success`))
+            }
+            console.log('reportCloudAPI', data)
+            const config = {
+                headers: {
+                    'content-type': 'application/json',
+                },
+            }
+            const response = await axios.post(url, data, config)
+            console.log('response api report', response.data)
+            return response.data
         } catch (error) {
             this.err(`Report error: ${error.message}`)
         }
@@ -209,21 +213,21 @@ class BaseClient {
 
     log(...message) {
         const date = new Date().toLocaleString().replace(/T/, ' ').replace(/\..+/, '')
-        console.log(`[${date}] [LOG] \t[${this.account.id}] ${message}`)
+        console.log(`[${date}] [LOG] [${this.account.seedPhrase}] ${message}`)
     }
     err(...message) {
         const date = new Date().toLocaleString().replace(/T/, ' ').replace(/\..+/, '')
-        console.error('\x1b[31m%s\x1b[0m', `[${date}] [ERROR] \t[${this.account.id}] ${message}`)
+        console.log('\x1b[31m%s\x1b[0m', `[${date}] [ERROR] [${this.account.seedPhrase}] ${message}`)
     }
     success(...message) {
         const date = new Date().toLocaleString().replace(/T/, ' ').replace(/\..+/, '')
-        console.log('\x1b[32m%s\x1b[0m', `[${date}] [SUCCESS] \t[${this.account.id}] ${message}`)
+        console.log('\x1b[32m%s\x1b[0m', `[${date}] [SUCCESS] [${this.account.seedPhrase}] ${message}`)
     }
     debug(...message) {
         let isDebug = process.env.ENVIROMENT === 'development'
         if (!isDebug) return
         const date = new Date().toLocaleString().replace(/T/, ' ').replace(/\..+/, '')
-        console.log('\x1b[34m%s\x1b[0m', `[${date}] [DEBUG] \t[${this.account.id}] ${message}`)
+        console.log('\x1b[34m%s\x1b[0m', `[${date}] [DEBUG] [${this.account.seedPhrase}] ${message}`)
     }
 }
 

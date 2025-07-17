@@ -1,5 +1,5 @@
 import { SiweMessage } from 'siwe'
-import { randomNonce } from '../../utils/common.js'
+import { randomNonce, sleep } from '../../utils/common.js'
 
 export async function isGalxeIDExist(client) {
     const retry = 10
@@ -22,7 +22,7 @@ export async function isGalxeIDExist(client) {
         } catch (error) {
             client.err(`Attempt ${attempt} to check galxe id exist failed: ${JSON.stringify(error)}`)
             if (attempt !== retry) {
-                await client.sleep(5000)
+                await sleep(5000)
             }
         }
     }
@@ -60,7 +60,7 @@ export async function createNewGalxeAccount(client) {
         } catch (error) {
             client.err(`Attempt ${attempt} to create new galxe account failed: ${error}`)
             if (attempt !== retry) {
-                await client.sleep(5000)
+                await sleep(5000)
             }
         }
     }
@@ -117,7 +117,7 @@ export async function login(client) {
         } catch (error) {
             client.err(`Attempt ${attempt} to login failed: ${error}`)
             if (attempt !== retry) {
-                await client.sleep(5000)
+                await sleep(5000)
             }
         }
     }

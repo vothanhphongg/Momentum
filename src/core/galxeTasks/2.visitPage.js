@@ -16,7 +16,7 @@ export async function visitPage(client) {
             client.success(`Already visited page, credId: ${credId}`)
             continue
         }
-        visit(client, credId, address)
+        await visit(client, credId, address)
     }
 }
 
@@ -29,10 +29,12 @@ async function visit(client, credId, address) {
     while (attempt < retry) {
         attempt++
         try {
-            const captcha = await ac.solveGeeTestV4Proxyless(
-                'https://app.galxe.com/quest/Momentum/GCXqbtpECP',
-                '244bcb8b9846215df5af4c624a750db4'
-            )
+            // const captcha = await ac.solveGeeTestV4Proxyless(
+            //     'https://app.galxe.com/quest/Momentum/GCXqbtpECP',
+            //     '244bcb8b9846215df5af4c624a750db4'
+            // )
+
+            const captcha = await client.solveGeetestCaptcha()
 
             const body = {
                 operationName: 'AddTypedCredentialItems',
@@ -42,12 +44,7 @@ async function visit(client, credId, address) {
                         campaignId,
                         operation: 'APPEND',
                         items: [`EVM:${address}`],
-                        captcha: {
-                            lotNumber: captcha.lot_number,
-                            captchaOutput: captcha.captcha_output,
-                            passToken: captcha.pass_token,
-                            genTime: captcha.gen_time,
-                        },
+                        captcha: captcha,
                     },
                 },
                 query: 'mutation AddTypedCredentialItems($input: MutateTypedCredItemInput!) {\n  typedCredentialItems(input: $input) {\n    id\n    __typename\n  }\n}',

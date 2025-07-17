@@ -1,0 +1,7 @@
+import{a as l,d as _}from"./chunk-RYRQK4MH.js";import{j as d}from"./chunk-G4AVWXHJ.js";import{d as U,e as F}from"./chunk-I3CPAVOC.js";import{Gb as y,ec as v}from"./chunk-HPWCPLRR.js";import{I as u,J as g,K as m,N as p,W as c,X as W,_ as H,ba as C,ca as N,da as E,fa as T,ha as S}from"./chunk-TM67VPZU.js";import{R as I,o as a,z as f}from"./chunk-UWJLNJLY.js";import{f as h,o as D,q as w}from"./chunk-6KXF36WM.js";D();w();var G=h(v());I();S();var P=()=>l(c,N),$=()=>l(c,E,T),z=o=>{let t=$(),e=P();return p(c(o),.01)?t(o):e(o)},M=()=>{let o=$(),t=P();return r=>p(c(r),.01)?o(r):t(r)},L=o=>l(H,W,e=>C(e,o?.vdecimalNum),T),V=(o,t,e={})=>F(a.mul(o,t),{symbol:e?.symbol,decimals:e?.decimals}),k=(o,t,e={})=>{let r=(0,G.useSelector)(y),s=L(e),i=d(e?.coinId),n=s(o,t);return _({amount:n,rate:i,symbol:r.symbol},{useApproximate:!0})},O=(o,t,e={})=>{let r=V(o,t,e),s=k(o,t,e);return`${r} ${s}`},Q=(o,t,e,r=0)=>{let s=d(e?.coinId)||"0",i=(0,G.useSelector)(y);if(!e)return"";let n=u(o,t),x=F(m(n,r),{symbol:e.symbol,decimals:e.decimals}),b=U(u(g(m(n,r),10**e.decimals),s),{symbol:i.symbol});return`${x} ${b}`},X=(o,t)=>{let e=z(o);return f("wallet_extension_transaction_confirmation_gas_detail",{gasPrice:a.thousandFormat(e),gasLimit:a.thousandFormat(t)})};export{z as a,M as b,O as c,Q as d,X as e};
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=chunk-IGYAABP7.js.map

@@ -1,0 +1,7 @@
+import{a}from"./chunk-VIK2TCMI.js";import"./chunk-W2CTJYFJ.js";import"./chunk-XUKVTAH5.js";import{f as l}from"./chunk-5OJTPISL.js";import"./chunk-7UPVX2FL.js";import"./chunk-BSFXZ46S.js";import"./chunk-ZMCTBWUY.js";import"./chunk-G2266BV2.js";import"./chunk-7VFUX7IX.js";import{o as d,q as i}from"./chunk-6KXF36WM.js";d();i();var m={getAccount:async({provider:o})=>{let{Address:e}=await import("./dist-TR234T7T.js"),{ton:s}=o||{},r=(await s.connect(s.protocolVersion,{items:[{name:"ton_addr"}]}))?.payload?.items[0]?.address;return e.parse(r).toString({urlSafe:!0,bounceable:!1,testOnly:!1})},getPublicKey:async({provider:o})=>{let{ton:e}=o||{};return(await e.connect(e.protocolVersion,{items:[{name:"ton_addr"}]}))?.payload?.items[0]?.publicKey},signMessage:async({provider:o,message:e})=>{let{ton:s}=o||{},n=await s.connect(s.protocolVersion,{manifestUrl:l("/cdn/assets/files/247/A242D54708108967.json"),items:[{name:"ton_addr"},{name:"ton_proof",payload:e}]});if(n?.event==="connect_error")throw a(n?.payload);return n?.payload?.items[1]?.proof},sendTransaction:async({provider:o,payload:e,cb:s})=>{let{Cell:n}=await import("./dist-TR234T7T.js"),{ton:r}=o||{},t=await r.send({method:"sendTransaction",params:e,id:Date.now()});if(t?.error)throw a(t?.error);let c=n.fromBase64(t?.result).hash().toString("hex");return s&&s(c),c}},g=m;export{g as default};
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=Ton-7JCMAETW.js.map

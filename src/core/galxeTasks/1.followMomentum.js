@@ -18,10 +18,12 @@ export async function visitTelegram(client) {
         while (attempt < retry) {
             attempt++
             try {
-                const captcha = await ac.solveGeeTestV4Proxyless(
-                    'https://app.galxe.com/quest/Momentum/GCy6btpWaf',
-                    '244bcb8b9846215df5af4c624a750db4'
-                )
+                // const captcha = await ac.solveGeeTestV4Proxyless(
+                //     'https://app.galxe.com/quest/Momentum/GCy6btpWaf',
+                //     '244bcb8b9846215df5af4c624a750db4'
+                // )
+                const captcha = await client.solveGeetestCaptcha()
+
                 const body = {
                     operationName: 'AddTypedCredentialItems',
                     variables: {
@@ -30,12 +32,7 @@ export async function visitTelegram(client) {
                             campaignId,
                             operation: 'APPEND',
                             items: [`EVM:${address}`],
-                            captcha: {
-                                lotNumber: captcha.lot_number,
-                                captchaOutput: captcha.captcha_output,
-                                passToken: captcha.pass_token,
-                                genTime: captcha.gen_time,
-                            },
+                            captcha: captcha,
                         },
                     },
                     query: 'mutation AddTypedCredentialItems($input: MutateTypedCredItemInput!) {\n  typedCredentialItems(input: $input) {\n    id\n    __typename\n  }\n}',
@@ -72,27 +69,26 @@ export async function followMomentumOnX(client) {
         while (attempt < retry) {
             attempt++
             try {
-                const captcha = await ac.solveGeeTestV4Proxyless(
-                    'https://app.galxe.com/quest/Momentum/GCy6btpWaf',
-                    '244bcb8b9846215df5af4c624a750db4'
-                )
+                // const captcha = await ac.solveGeeTestV4Proxyless(
+                //     'https://app.galxe.com/quest/Momentum/GCy6btpWaf',
+                //     '244bcb8b9846215df5af4c624a750db4'
+                // )
+                const captcha = await client.solveGeetestCaptcha()
                 const body = {
-                    operationName: 'AddTypedCredentialItems',
+                    operationName: 'SyncCredentialValue',
                     variables: {
                         input: {
-                            credId,
-                            campaignId,
-                            operation: 'APPEND',
-                            items: [`EVM:${address}`],
-                            captcha: {
-                                lotNumber: captcha.lot_number,
-                                captchaOutput: captcha.captcha_output,
-                                passToken: captcha.pass_token,
-                                genTime: captcha.gen_time,
+                            syncOptions: {
+                                credId: credId,
+                                address: `EVM:${address}`,
+                                twitter: {
+                                    campaignID: campaignId,
+                                    captcha: captcha,
+                                },
                             },
                         },
                     },
-                    query: 'mutation AddTypedCredentialItems($input: MutateTypedCredItemInput!) {\n  typedCredentialItems(input: $input) {\n    id\n    __typename\n  }\n}',
+                    query: 'mutation SyncCredentialValue($input: SyncCredentialValueInput!) {\n  syncCredentialValue(input: $input) {\n    value {\n      address\n      spaceUsers {\n        follow\n        points\n        participations\n        __typename\n      }\n      campaignReferral {\n        count\n        __typename\n      }\n      galxePassport {\n        eligible\n        lastSelfieTimestamp\n        __typename\n      }\n      spacePoint {\n        points\n        __typename\n      }\n      spaceParticipation {\n        participations\n        __typename\n      }\n      gitcoinPassport {\n        score\n        lastScoreTimestamp\n        __typename\n      }\n      walletBalance {\n        balance\n        __typename\n      }\n      multiDimension {\n        value\n        __typename\n      }\n      allow\n      survey {\n        answers\n        __typename\n      }\n      quiz {\n        allow\n        correct\n        __typename\n      }\n      prediction {\n        isCorrect\n        __typename\n      }\n      spaceFollower {\n        follow\n        __typename\n      }\n      __typename\n    }\n    message\n    __typename\n  }\n}',
                 }
 
                 await client.post('https://graphigo.prd.galaxy.eco/query', body)

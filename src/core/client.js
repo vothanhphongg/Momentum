@@ -8,6 +8,9 @@ import { twitterOperations } from './galxeTasks/3.twitterOperations.js'
 import { getBasicUserInfo, getCampaignDetail, getClaimedPoints, isTaskEligible } from './basicOperations/getInfo.js'
 import { provideLiquidity } from './momentumTasks/provideLiquidity.js'
 import { claimPoint } from './galxeTasks/claimPoint.js'
+import { sleep } from '../utils/common.js'
+import { solveGeetestCaptcha } from './basicOperations/solveGeetestCaptcha.js'
+import { getCookie, getLocalStorage } from './basicOperations/getLocalStorage.js'
 class Client extends BaseClient {
     constructor(account) {
         super(account)
@@ -19,6 +22,7 @@ class Client extends BaseClient {
     visitTelegram = async () => visitTelegram(this)
     createNewGalxeAccount = async () => createNewGalxeAccount(this)
     login = async () => login(this)
+    sleep = async ms => sleep(this, ms)
     getBasicUserInfo = async () => getBasicUserInfo(this)
     getCampaignDetail = async () => getCampaignDetail(this)
     connectXAccount = async () => connectXAccount(this)
@@ -31,6 +35,9 @@ class Client extends BaseClient {
     getClaimedPoints = campaignId => getClaimedPoints(this, campaignId)
     provideLiquidity = async () => provideLiquidity(this)
     claimPoint = async () => claimPoint(this)
+    solveGeetestCaptcha = async () => solveGeetestCaptcha(this)
+    getLocalStorage = () => getLocalStorage(this)
+    getCookie = () => getCookie(this)
 }
 
 export default Client

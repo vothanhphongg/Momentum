@@ -40,7 +40,7 @@ export async function twitterOperations(client) {
             continue
         } else {
             client.log(`Processing ${taskName}, credId: ${credId}`)
-            likeOrRetweet(client, credId, address).then(result => {
+            await likeOrRetweet(client, credId, address).then(result => {
                 if (result) {
                     client.success(`Successfully ${taskName}, credId: ${credId}`)
                 }
@@ -57,10 +57,11 @@ async function likeOrRetweet(client, credId, address) {
     while (attempt < retry) {
         attempt++
         try {
-            const captcha = await ac.solveGeeTestV4Proxyless(
-                'https://app.galxe.com/quest/Momentum/GCPk3tpmR5',
-                '244bcb8b9846215df5af4c624a750db4'
-            )
+            // const captcha = await ac.solveGeeTestV4Proxyless(
+            //     'https://app.galxe.com/quest/Momentum/GCPk3tpmR5',
+            //     '244bcb8b9846215df5af4c624a750db4'
+            // )
+            const captcha = await client.solveGeetestCaptcha()
 
             const body = {
                 operationName: 'AddTypedCredentialItems',
@@ -70,12 +71,7 @@ async function likeOrRetweet(client, credId, address) {
                         campaignId,
                         operation: 'APPEND',
                         items: [`EVM:${address}`],
-                        captcha: {
-                            lotNumber: captcha.lot_number,
-                            captchaOutput: captcha.captcha_output,
-                            passToken: captcha.pass_token,
-                            genTime: captcha.gen_time,
-                        },
+                        captcha: captcha,
                     },
                 },
                 query: 'mutation AddTypedCredentialItems($input: MutateTypedCredItemInput!) {\n  typedCredentialItems(input: $input) {\n    id\n    __typename\n  }\n}',

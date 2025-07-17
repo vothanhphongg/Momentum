@@ -1,0 +1,7 @@
+import{a as o,b as s,c as h,n as V}from"./chunk-PQK3LXXN.js";import{R as N,k as D}from"./chunk-UWJLNJLY.js";import{o as g,q as m}from"./chunk-6KXF36WM.js";g();m();N();var W=({pay:e,receive:r,quoteDiffValThreshold:n,quoteDiffPercentThreshold:i})=>{if(s(e)||s(r)||h(e))return{pay:"0",receive:"0",quoteDiffValThreshold:"0",quoteDiffPercentThreshold:"0",showValueDiffDialog:!1,showValueDiffPercent:!1,diffVal:"0.00",diffPercent:"0%",diffValueType:"normal",diffPercentWeakTip:!0};let f=new o.BigNumber(r).minus(e),t=f.div(e),p=f.lte(n||"0"),l=t.lte(i||"0"),c=p||l,T=t.gt("-0.001")&&t.lt("0.001"),d=t.gt(i)&&t.lt(new o.BigNumber(i).abs());if(T)return{diffPercent:"0.00%",diffVal:f.toString(10),showValueDiffDialog:c,showValueDiffPercent:!1,diffValueType:"hidden",pay:e,receive:r,quoteDiffValThreshold:n,quoteDiffPercentThreshold:i,diffPercentWeakTip:d};let a="normal";t.gte("0.001")&&(a="up"),l&&(a="down");let u=V(t.multipliedBy(100).toString(10),{needZero:!0});return{diffPercent:t.lt(0)?u:`+${u}`,diffVal:f.toString(10),showValueDiffDialog:c,showValueDiffPercent:!0,diffValueType:a,pay:e,receive:r,quoteDiffValThreshold:n,quoteDiffPercentThreshold:i,diffPercentWeakTip:d}},P="0.01",w=e=>new o.BigNumber(e).lt(P)?P:new o.BigNumber(e).toFixed(2,1),I=(e,r,n)=>{let i=e.replace("-","").replace("+","");if(!r)return i;let f=w(r),t=D.formatCurrency(f,{currencySign:n});return`${i} (\u2248${t})`};export{W as a,I as b};
+
+window.inOKXExtension = true;
+window.inMiniApp = false;
+window.ASSETS_BUILD_TYPE = "publish";
+
+//# sourceMappingURL=chunk-ENPNPH37.js.map
